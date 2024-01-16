@@ -1,0 +1,60 @@
+<div class="main" style="display: flex; flex: 1;">
+    <app-admin-navbar></app-admin-navbar>
+    <div class="user-main">
+      <!-- <div class="right-side">
+          </div>   -->
+      <div class="left-side">
+        <h3>Create products</h3>
+        <form action="" style="display: flex; flex-direction: column; justify-content: space-between;" #editprdctForm="ngForm"
+          (ngSubmit)="editPrdct()">
+
+          <div class="inputs">
+            <label for="">Product Title: </label>
+            <mat-form-field>
+              <mat-label>Product Title</mat-label>
+              <input type="text" matInput required name="title" ngModel>
+            </mat-form-field>
+          </div>
+  
+          <div class="inputs">
+            <label for="">Product Author: </label>
+            <mat-form-field>
+              <mat-label>Product Author</mat-label>
+              <input type="text" matInput required name="author" ngModel>
+            </mat-form-field>
+          </div>
+  
+          <div class="inputs">
+          <label for="">Product Image</label>
+            <input type="file" required name="image" ngModel (change)="selectImage($event)">
+        </div>
+  
+          <div class="inputs">
+            <label for="">Product Description</label>
+            <mat-form-field>
+              <mat-label>Product Description</mat-label>
+              <input type="text" matInput name="description" ngModel>
+            </mat-form-field>
+          </div>
+  
+          <div class="inputs">
+            <label for="">Product Type</label>
+            <mat-form-field>
+              <mat-label>Product Type</mat-label>
+              <input type="text" matInput required name="category" ngModel>
+            </mat-form-field>
+          </div>
+  
+          <div class="inputs">
+            <label for="">Product Price</label>
+            <mat-form-field>
+              <mat-label>Product Price</mat-label>
+              <input type="text" matInput required name="price" ngModel>
+            </mat-form-field>
+          </div>
+  
+          <button mat-raised-button color="accent" type="submit">Update product</button>
+  
+        </form>
+      </div>
+    </div>

@@ -1,0 +1,12 @@
+    <div class="card-img">
+        <div class="book-img" style="overflow: hidden;">
+            <a [routerLink]="'/viewproduct/'+(allProducts._id)+'/'+(allProducts.category)">
+                <img class="card-img-top w-100" [src]="allProducts.image" alt="Card image cap">
+            </a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{allProducts.title}}</h5>
+            <p class="card-text">—{{allProducts.author | uppercase}}</p>
+            <p>Price: {{allProducts.price | currency:'INR'}}</p>
+        </div>
+    </div>

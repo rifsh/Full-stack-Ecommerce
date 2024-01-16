@@ -1,0 +1,23 @@
+<!-- nav-bar -->
+<app-nav-bar></app-nav-bar>
+
+<div>
+
+    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;">
+        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Sci-Fi Books
+        </h4>
+        <div class="cards container row  d-flex justify-content-center align-items-center " >
+    
+            <div class="cards container row  d-flex justify-content-center align-items-center ">
+            
+                <div class="col-md-3" *ngFor="let i of scifiBooks">
+                    <app-products-list [allProducts]="i"></app-products-list>
+                </div>
+                
+            </div>
+    </div>
+</div>
+<hr>
+
+<!-- footer -->
+<app-footer></app-footer>

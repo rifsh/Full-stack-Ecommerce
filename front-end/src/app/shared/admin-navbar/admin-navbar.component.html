@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button (click)="sidenav.toggle();" mat-icon-button>
+            <mat-icon >menu</mat-icon>
+        </button>
+        <h1>side nav</h1>
+    </mat-toolbar-row>
+</mat-toolbar>
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav opened="false" mode="side">
+            <mat-nav-list >
+                <a mat-list-item routerLink="/admin-dashboard">Dashboard</a>
+                <a mat-list-item routerLink="/admin-users">Users</a>
+                <a mat-list-item routerLink="/admin-products">Products</a>
+                <a mat-list-item routerLink="/add-product">Add products</a>
+            </mat-nav-list>
+            <a style="text-decoration: none; color: black; align-items: center;"(click)="logout()" routerLink="/login">Logout</a>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div >
+                <router-outlet></router-outlet>
+                <!-- <h1>hello</h1> -->
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>

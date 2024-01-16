@@ -1,0 +1,13 @@
+.container-fluid img{
+    width: 100%;
+}
+
+.dropdown-menu li {
+    transition: transform 0.5s;
+}
+.dropdown-menu li:hover{
+    transform: scale(0.9);
+}
+li {
+    cursor: pointer;
+}

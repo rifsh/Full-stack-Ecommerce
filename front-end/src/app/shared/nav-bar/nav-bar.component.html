@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="">
+        <img style="object-fit: cover; height: 70px;"
+          src="https://imgs.search.brave.com/Sw4dxm-2mvfZ0p0BBP7pf-zGLWxUqX_MmptaUGxG4Yw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgy/Njc1NzQyL3Bob3Rv/L2Jvb2tzLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz05aVhS/ZE1zM3NOMjVpSHll/NWtBRkJxRDRUcjFJ/VlI0SVk4Z1hHOGJr/VE1VPQ" alt="Bootstrap"
+          width="100px" height="40px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href=""></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/all-products">All Products</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{drpdownValue}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/action/action" (click)="dropdownValue('Action & Adventure')">Action & Adventure</a></li>
+              <li><a class="dropdown-item" routerLink="/sci-fi/sci-fi" (click)="dropdownValue('Science Fiction')">Science Fiction</a></li>
+              <li><a class="dropdown-item" routerLink="/history/history"(click)="dropdownValue('History')">History</a></li>
+              <li><a class="dropdown-item" routerLink="/horror/horror" (click)="dropdownValue('Horror')">Horror</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              <!-- </li>
+              <li><a class="dropdown-item" href="#">Table Sets</a></li> -->
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" *ngIf="searchCondition" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" [(ngModel)]="searchValue" (input)="searchOperation()">
+          <button class="btn btn-outline-success" type="submit" (click)="searchOperation()" >Search</button>
+        </form>
+        <ul class="navbar-nav " style="position: relative;">
+          <li class="nav-item" *ngIf="logLinkShow"><a class="nav-link" routerLink="/sign-up">Login or SignUp</a>
+          </li>
+          <li class="nav-item" *ngIf="logoutLinkShow"><a class="nav-link"  (click)="logOut()">Logout</a></li>
+          <li class="nav-item" *ngIf="logoutLinkShow"><a  class="nav-link" routerLink="">Hi <span style="font-size: 15px; font-weight: bolder;">{{usrname}}</span></a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="/add-to-cart"  *ngIf="showcart">
+            <div style="display: flex;" >
+              <span class="material-icons" style="color: rgb(0, 0, 0);">shopping_cart</span>
+              <div style="position: absolute; top: -8px; right: 16px;">
+                {{cartCount}}
+              </div>
+            </div>
+          </a></li> -->
+          
+          <div class="demo-section d-flex align-items-center" style="cursor: pointer;" *ngIf="showcart" >
+            <mat-icon role="img" aria-hidden="false" aria-label="Shopping cart" tabindex="0" [matBadge]="cartIconCount" matBadgeColor="warn" routerLink="/view-cart" style="cursor: pointer;">shopping_cart</mat-icon>
+            <!-- <mat-icon style="cursor: pointer;" [matBadge]="cartIconCount" matBadgeColor="warn" routerLink="/add-to-cart">shopping_cart</mat-icon> -->
+              <Span>Cart</Span>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>

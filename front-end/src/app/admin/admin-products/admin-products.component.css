@@ -1,0 +1,32 @@
+.user-main {
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    box-shadow: 2px 2px 40px #343a40;
+}
+
+table th {
+    font-size: larger;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 10px;
+    color: white;
+    background-color: #343a40;
+    height: 70px;
+    text-align: center;
+}
+
+table,
+th,
+td {
+    border: 1px solid #343a40;
+    ;
+    min-width: 120px;
+    text-align: start;
+}
+
+img {
+    width: 100%;
+    padding: 10px;
+}

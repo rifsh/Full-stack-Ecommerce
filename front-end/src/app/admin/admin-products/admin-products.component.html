@@ -1,0 +1,33 @@
+<div class="main" style="display: flex; flex: 1;">
+    <app-admin-navbar></app-admin-navbar>
+    <div class="user-main">
+        <h1 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Products</h1>
+        <table>
+            <tr>
+                <th>Product title</th>
+                <th>Author</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            <tr *ngFor="let  i of allProdutcs">
+                <td>{{i.title}}</td>
+                <td>{{i.author}}</td>
+                <td>
+                    <img [src]="i.image" alt="">
+                </td>
+                <td>{{i.description}}</td>
+                <td>{{i.category}}</td>
+                <td>{{i.price | currency: 'INR'}}</td>
+                <td style="text-align: center;">
+                    <button (click)="removeProducts(i._id)" mat-raised-button color="warn">Remove</button>
+                </td>
+                <td style="text-align: center;">
+                    <button mat-flat-button [routerLink]="'/edit-product/'+(i._id)">Edit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
