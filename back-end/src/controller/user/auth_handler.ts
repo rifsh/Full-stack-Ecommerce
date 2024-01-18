@@ -99,7 +99,7 @@ const deleteCartItems = catchAsync(async (req: Request, res: Response, next: Nex
     if (deletedProduct) {
         res.status(200).json({
             status: "OK",
-            message: "Deleted successfully",
+            message: "Removed successfully",
 
         })
     } else {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npm tsc",
     "start": "nodemon ./dist/server.js",
     "tsc": "tsc -w & nodemon ./dist/server.js"
   },
@@ -32,8 +32,10 @@
     "nodemon": "^3.0.2",
     "socket.io": "^4.7.4",
     "stripe": "^14.10.0",
-    "typescript": "^5.3.3",
     "validator": "^13.11.0",
     "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
   }
 }

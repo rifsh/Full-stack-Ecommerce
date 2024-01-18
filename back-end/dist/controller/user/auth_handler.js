@@ -126,7 +126,7 @@ const deleteCartItems = (0, asyncHandler_1.default)((req, res, next) => __awaite
     if (deletedProduct) {
         res.status(200).json({
             status: "OK",
-            message: "Deleted successfully",
+            message: "Removed successfully",
         });
     }
     else {
