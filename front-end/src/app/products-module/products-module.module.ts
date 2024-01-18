@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { RelatedprdctViewComponent } from './relatedprdct-view/relatedprdct-view.component';
 import { AddToCartComponent } from './view-cart/view-cart';
+import { NgxPaginationModule } from "ngx-pagination";
 
 const routes:Routes = [
   {path:'', component: AllProdutsComponent},
@@ -33,6 +34,7 @@ const routes:Routes = [
     AddToCartComponent
   ],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     FormsModule,
     SharedModule,

@@ -2,44 +2,46 @@
 <app-nav-bar [cartIconCount]="cartIincrement" (searchText)="changeSearch($event)"></app-nav-bar>
 
 <!-- section -->
-    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;"
+<div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;"
     *ngIf="prdctCondition">
-        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Give the Gift of Good Fiction
-        </h4>
-        <div class="cards container row  d-flex justify-content-center align-items-center ">
-            
-            <div class="col-md-3" *ngFor="let i of allProducts">
-                <app-products-list [allProducts]="i"></app-products-list>
-            </div>
-            
+    <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" class="mb-5">
+        Give the Gift of Good Fiction
+    </h4>
+    <div class="cards container row  d-flex justify-content-center align-items-center ">
+        <p style="font-weight: bolder;">Total-books: {{totalBooks}}</p>
+        <div class="col-md-3" *ngFor="let i of allProducts | paginate: { itemsPerPage: 8, currentPage: page }">
+            <app-products-list [allProducts]="i"></app-products-list>
         </div>
+
     </div>
-    <hr>
-    
+</div>
+<hr>
+
 <!-- search-section -->
-    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;" 
-        *ngIf="searchValue.length>0">
-        <p> Result: {{searchedArray.length}} </p>
-        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Searched Books
-        </h4>
-        <div class="cards container row  d-flex justify-content-center align-items-center ">
-            
-            <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of searchedArray ">
-                <div >
-                    <a [routerLink]="'/viewproduct/'+(i._id)">
-                        <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{i.title}}</h5>
-                        <p class="card-text">—{{i.author | uppercase}}</p>
-                        <p>Price: {{i.price | currency:'INR'}}</p>
-                    </div>
+<div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;"
+    *ngIf="searchValue.length>0">
+    <p> Total-books: {{searchedArray.length}} </p>
+    <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        Searched Books
+    </h4>
+    <div class="cards container row  d-flex justify-content-center align-items-center ">
+
+        <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of searchedArray ">
+            <div>
+                <a [routerLink]="'/viewproduct/'+(i._id)">
+                    <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{i.title}}</h5>
+                    <p class="card-text">—{{i.author | uppercase}}</p>
+                    <p>Price: {{i.price | currency:'INR'}}</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- footer -->
-    <app-footer></app-footer>
+<pagination-controls (pageChange)="page = $event" style="text-align: center;"></pagination-controls>
+
+<!-- footer -->
+<app-footer></app-footer>

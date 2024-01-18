@@ -38,6 +38,6 @@ export class ViewProductComponent {
 
   addToCart(prdctid: string) {
     this.srvc.CartFunction(prdctid);
-    
+    ;
   }
 }

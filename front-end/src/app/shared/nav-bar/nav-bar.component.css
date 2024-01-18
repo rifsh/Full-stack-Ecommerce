@@ -1,13 +1,28 @@
-.container-fluid img{
+.container-fluid img {
     width: 100%;
 }
 
 .dropdown-menu li {
     transition: transform 0.5s;
 }
-.dropdown-menu li:hover{
+
+.dropdown-menu li:hover {
     transform: scale(0.9);
 }
+
 li {
     cursor: pointer;
+}
+.cart_con {
+    transition: box-shadow 0.9s;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.cart_con:hover {
+    cursor: pointer;
+}
+
+a {
+    color: white;
 }

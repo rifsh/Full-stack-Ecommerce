@@ -19,7 +19,7 @@ export class UserProductsService {
   toast: ToastrService = inject(ToastrService);
 
   totalPrice: number = 0
-  cartIconCount: number;
+  cartIconCount: number = 0;
 
   // private subject: WebSocketSubject
 
@@ -243,11 +243,12 @@ export class UserProductsService {
   CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');
     const prdctId = { productId: productId }
-    return this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
+    this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
       if (res.message === 'Product is already present in the cart') {
         this.toast.info(res.message);
       } else {
         this.toast.success(res.message);
+        this.cartIconCount = res.totalProducts;
       }
       this.totalPrice = res.totalPrice;
 

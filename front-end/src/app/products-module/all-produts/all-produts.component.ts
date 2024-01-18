@@ -11,11 +11,14 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
   styleUrls: ['./all-produts.component.css']
 })
 export class AllProdutsComponent {
+  totalBooks:number = 0;
   prdctCondition: boolean = true;
   allProducts: ResponseProductView[] = [];
   searchValue: string = '';
   searchedArray: ResponseProductView[] = [];
-  cartIincrement: number;
+  cartIincrement: number = 12;
+  page : number
+
   constructor(private srvc: UserProductsService, private usrsrvc: UserSrvcService, private activateRoute: ActivatedRoute, private filterSrvc: UserProductsService) {
 
   }
@@ -30,9 +33,10 @@ export class AllProdutsComponent {
     }
     this.srvc.getProducts().subscribe((res: ResponseProduct) => {
       this.allProducts = res.datas
-      
+      this.totalBooks = this.allProducts.length;
+       
     })
-    this.cartIincrement = this.filterSrvc.cartIconCount;
+    
   }
 
   changeSearch(searchContent: string) {
