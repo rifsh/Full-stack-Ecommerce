@@ -1,4 +1,4 @@
-interface userInterface {
+export interface userInterface {
     name: string,
     usrname: string,
     password: string,

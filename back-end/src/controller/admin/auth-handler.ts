@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import catchAsync from "../../utils/asyncHandler";
 import { admin_srvc } from "../../services/admin/auth-controller";
+import { Product } from "../../interfaces/products_interface";
 
 const login = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const response = await admin_srvc.login(req, next);

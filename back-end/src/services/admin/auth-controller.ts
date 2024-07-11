@@ -6,6 +6,8 @@ import { CustomeError } from "../../utils/customerror";
 import { Users } from "../../models/user/usermodel";
 import { producModel } from "../../models/productsmodel";
 import { adminModel } from "../../models/admin/login";
+import { Product } from "../../interfaces/products_interface";
+import { userInterface } from "../../interfaces/user/user_model";
 
 
 dotenv.config({ path: path.join(__dirname, '../../../../config.env') });

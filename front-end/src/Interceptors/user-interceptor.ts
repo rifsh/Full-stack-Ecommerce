@@ -7,8 +7,6 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
-import { LoginDetail, LoginResponse } from 'src/app/core/models/login-model';
-import { MainUser } from 'src/app/core/models/user-reg-model';
 
 @Injectable()
 export class UserInterceptorInterceptor implements HttpInterceptor {

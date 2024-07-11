@@ -26,22 +26,17 @@
     </h4>
     <div class="cards container row  d-flex justify-content-center align-items-center ">
 
-        <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of searchedArray ">
-            <div>
-                <a [routerLink]="'/viewproduct/'+(i._id)">
-                    <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">{{i.title}}</h5>
-                    <p class="card-text">—{{i.author | uppercase}}</p>
-                    <p>Price: {{i.price | currency:'INR'}}</p>
-                </div>
-            </div>
+        <div class="col-md-3" *ngFor="let i of searchedArray">
+            <app-products-list [allProducts]="i"></app-products-list>
         </div>
     </div>
 </div>
 
-<pagination-controls (pageChange)="page = $event" style="text-align: center;"></pagination-controls>
+<pagination-controls *ngIf="searchValue.length===0" (pageChange)="page = $event"
+    style="text-align: center;"></pagination-controls>
 
 <!-- footer -->
 <app-footer></app-footer>
+
+
+

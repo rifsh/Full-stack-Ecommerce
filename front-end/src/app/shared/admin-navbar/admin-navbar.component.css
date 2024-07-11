@@ -1,21 +1,20 @@
 mat-toolbar {
-  background: #004a9f;
+  background: #4d4d4d;
   color: white;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+
 }
 
 mat-sidenav {
-  margin: 16px;
   width: 200px;
-  border-right: none;
-  background: #fffbfb;
+  background: #ffffff;
+  box-shadow: 0.063rem 0 1.25rem 0 #4788ff;
   color: white;
-  border-radius: 10px;
   padding: 16px;
   text-align: start;
-  
+
 }
 
 
@@ -34,10 +33,12 @@ mat-sidenav {
   font-size: 2rem;
   color: lightgray;
 }
+
 a {
 
   transition: transform 0.5s;
 }
+
 a:hover {
   border-radius: 9px;
   transform: scale(1.1);

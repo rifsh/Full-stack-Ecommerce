@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { ProductModel } from '../models/allproducts.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,14 +6,14 @@ import { UserSrvcService } from './user-srvc.service';
 import { CartResponseModel } from '../models/response-model';
 import { ToastrService } from 'ngx-toastr';
 import { ObjectId } from 'mongoose';
-import * as io from 'socket.io-client';
-
+import { Router, RouterLink } from '@angular/router';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserProductsService {
+
+export class UserProductsService implements OnInit {
   http: HttpClient = inject(HttpClient);
   srvc: UserSrvcService = inject(UserSrvcService);
   toast: ToastrService = inject(ToastrService);
@@ -21,9 +21,13 @@ export class UserProductsService {
   totalPrice: number = 0
   cartIconCount: number = 0;
 
-  // private subject: WebSocketSubject
+  constructor(private router: Router) {
 
-  // constructor(private socket: ) { }
+  }
+
+  ngOnInit(): void {
+    console.log("this.cartIconCount");
+  }
 
   allProductsSrvc: ProductModel[] = [
     {
@@ -242,20 +246,24 @@ export class UserProductsService {
   }
   CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');
-    const prdctId = { productId: productId }
-    this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
-      if (res.message === 'Product is already present in the cart') {
-        this.toast.info(res.message);
-      } else {
-        this.toast.success(res.message);
-        this.cartIconCount = res.totalProducts;
-      }
-      this.totalPrice = res.totalPrice;
-
-    }, (err) => {
-      console.log(err);
-      this.toast.warning('Something went wrong');
-    });
+    if (!userId) {
+      this.toast.info("Please Login!");
+      this.router.navigate(['login']);
+    }else{
+      const prdctId = { productId: productId }
+      this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
+        if (res.message === 'Product is already present in the cart') {
+          this.toast.info(res.message);
+        } else {
+          this.toast.success(res.message);
+          this.cartIconCount = res.totalProducts;
+        }
+  
+      }, (err) => {
+        console.log(err);
+        this.toast.warning('Something went wrong');
+      });
+    }
   }
   fetchCartProducts() {
     const userId: string = localStorage.getItem('userId');
@@ -270,7 +278,7 @@ export class UserProductsService {
     const prdctId = { productId: productId }
     return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`, prdctId)
   }
-  paymentSection():Observable<object> {
+  paymentSection(): Observable<object> {
     return this.http.get('http://localhost:3000/api/users/65a1065d66be826823822295/payment')
   }
 

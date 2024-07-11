@@ -15,22 +15,18 @@ export class NavBarComponent {
   showcart: boolean;
   logLinkShow: boolean;
   logoutLinkShow: boolean;
-  drpdownValue: string = 'Collections';
+  drpdownValues: string = "Collections";
   searchValue: string;
   searchedArray: ProductModel[] = [];
   cartCount: number;
   usrname: string;
 
 
-  constructor(private srvc: UserSrvcService, private route: Router, private usrSrvc: UserProductsService) {}
+  constructor(private srvc: UserSrvcService, private route: Router, private usrSrvc: UserProductsService) { }
 
-  @Output()  searchText: EventEmitter<string> = new EventEmitter<string>;
+  @Output() searchText: EventEmitter<string> = new EventEmitter<string>;
   @Input() cartIconCount: number;
 
-
-  dropdownValue(drpValue: string) {
-    this.drpdownValue = drpValue;
-  }
   ngOnInit(): void {
     this.cartCount = this.usrSrvc.cartIconCount;
     this.searchCondition = this.srvc.showSearchBox;
@@ -40,6 +36,7 @@ export class NavBarComponent {
     this.usrname = this.srvc.usrname;
   }
   ngOnChanges(): void {
+    this.cartCount = this.usrSrvc.cartIconCount;
 
   }
 

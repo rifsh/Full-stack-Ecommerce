@@ -32,7 +32,7 @@ const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config({ path: path_1.default.join(__dirname, '../config.env') });
 function connection() {
-    mongoose_1.default.connect(process.env.DATABASE_UR, {
+    mongoose_1.default.connect('mongodb://admin:password@localhost:27017', {
         dbName: 'User'
     })
         .then((conn) => {

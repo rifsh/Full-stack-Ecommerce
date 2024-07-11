@@ -136,7 +136,6 @@ const succes = catchAsync(async (req: Request, res: Response, next) => {
 const cancel = catchAsync(async (req: Request, res: Response, next) => {
     res.send("Denied");
 })
-
 const deleteall = catchAsync(async (req: Request, res: Response, next) => {
     await orderModel.deleteMany();
 })

@@ -8,5 +8,12 @@
             <h5 class="card-title">{{allProducts.title}}</h5>
             <p class="card-text">—{{allProducts.author | uppercase}}</p>
             <p>Price: {{allProducts.price | currency:'INR'}}</p>
+            <div class="d-flex">
+                <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                <button class="btn btn-outline-dark flex-shrink-0" (click)="addToCart(allProducts._id)" type="button">
+                    <i class="bi-cart-fill me-1"></i>
+                    Add to cart
+                </button>
+            </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +15,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.interceptor';
 import { UserInterceptorInterceptor } from 'src/Interceptors/user-interceptor';
+import { KeycloakAngularModule } from 'keycloak-angular';
+import { KeycloakServices } from './core/keycloak/keycloak.service';
 
+function initializeKeycloak(keycloakInitService: KeycloakServices) {
+  return () => keycloakInitService.ngOnInit();
+}
 
 @NgModule({
   declarations: [
@@ -31,18 +36,27 @@ import { UserInterceptorInterceptor } from 'src/Interceptors/user-interceptor';
     ReactiveFormsModule,
     SharedModule,
     MatModule,
+    KeycloakAngularModule,
     CoreModule,
     AdminModule,
     ToastrModule.forRoot(
       {
-        timeOut: 2000,
+        timeOut: 1000,
+        preventDuplicates: true,
       }
     )
-    
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptorInterceptor, multi: true },
+    KeycloakServices,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      deps: [KeycloakServices],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

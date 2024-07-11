@@ -7,7 +7,7 @@ import { Users } from "../models/user/usermodel";
 import path from "path";
 import catchAsync from "../utils/asyncHandler";
 
-dotenv.config({path: path.join(__dirname, '../../config.env')})
+dotenv.config({ path: path.join(__dirname, '../../config.env') })
 
 export const userRouteProtecter = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     //Reading the token and check if it exist
@@ -18,6 +18,7 @@ export const userRouteProtecter = catchAsync(async (req: Request, res: Response,
         token = sampleToken[1];
     }
 
+
     if (!token) {
         next(new CustomeError('You are not logged in !!', 402));
     }
@@ -27,7 +28,7 @@ export const userRouteProtecter = catchAsync(async (req: Request, res: Response,
     const tokenDec = tokenDecode as JwtPayload
     //If the user exist
     let user = await Users.findById(tokenDec.id);
-    
+
     if (!user) {
         next(new CustomeError('User is not present', 401));
     }
@@ -36,7 +37,7 @@ export const userRouteProtecter = catchAsync(async (req: Request, res: Response,
 })
 export const adminRouteProtecter = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     let token: string;
-    
+
     const headerToken = req.headers.authorization;
     if (!headerToken) {
         next(new CustomeError('Please provide a token', 401));
@@ -47,7 +48,7 @@ export const adminRouteProtecter = catchAsync(async (req: Request, res: Response
     if (!token) {
         next(new CustomeError('You are not logged in !!', 402));
     }
-    const tokenDecode= await jwt.verify(token, process.env.jwt_string);
+    const tokenDecode = await jwt.verify(token, process.env.jwt_string);
     const tokenDec = tokenDecode as JwtPayload;
 
     const admin = process.env.ADMIN_USRNAME === tokenDec.name;

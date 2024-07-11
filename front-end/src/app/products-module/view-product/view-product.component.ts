@@ -14,15 +14,14 @@ export class ViewProductComponent {
   horrorBooks: ResponseProductView[] = [];
   relatedProduct: ResponseProductView[] = [];
 
-  type: string;
-  cartIncerment: number;
+  // type: string;
+  cartIncerment: number = 0;
 
 
-  constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService) { 
+  constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService) {
   }
 
   ngOnInit(): void {
-    let productId: string;
     this.srvcUser.showSearchBox = false;
     this.srvcUser.showCart = true;
     let routeParam: string = this.activateRoute.snapshot.paramMap.get("id");
@@ -38,6 +37,5 @@ export class ViewProductComponent {
 
   addToCart(prdctid: string) {
     this.srvc.CartFunction(prdctid);
-    ;
   }
 }

@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminSrvcService } from './services/admin-srvc.service';
 import { FilterService } from './services/filter.service';
 import { HttpClientModule } from '@angular/common/http';
+import { KeycloakAngularModule } from 'keycloak-angular';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
     UserProductsService,
     UserSrvcService,
     FilterService,
-    AdminSrvcService
+    AdminSrvcService,
+    KeycloakAngularModule
   ]
 })
 export class CoreModule { }

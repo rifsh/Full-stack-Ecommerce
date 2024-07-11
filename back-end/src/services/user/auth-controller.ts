@@ -10,11 +10,12 @@ import { Usersignup } from "../../interfaces/user/userSignup";
 import userCartInterface from "../../interfaces/user/user_cart";
 import { Model, ObjectId } from "mongoose";
 import wishlistInterface from "../../interfaces/user/wishlist_model";
+import { Product } from "../../interfaces/products_interface";
 
 
 //JWT_token
 
-const signUp = async (userDatas: Usersignup): Promise<Usersignup> => {
+const signUp = async (userDatas: Usersignup)=> {
     const newUser = await Users.create(userDatas);
     return newUser
 }
@@ -39,7 +40,7 @@ const products = async ():Promise<Product[]> => {
     products = await producModel.find({});
     return products
 }
-const productByCategory = async (category: string, next: NextFunction): Promise<Product[]> => {
+const productByCategory = async (category: string, next: NextFunction) => {
     const categorizedProduts = await producModel.find({ category: category });
 
     if (categorizedProduts.length === 0) {
@@ -97,7 +98,7 @@ const addToCart = async (productId: ObjectId, userId: string, res: Response, nex
     }
 
 }
-const viewCart = async (userId: string): Promise<Product[]> => {
+const viewCart = async (userId: string) => {
     const viewCart = await CartModel.findOne({ userId: userId });
     const productId = viewCart.products
     const products = await producModel.find({ _id: productId });

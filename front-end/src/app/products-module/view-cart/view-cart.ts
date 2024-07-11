@@ -66,9 +66,7 @@ export class AddToCartComponent {
   }
   payment() {
     this.prdctsSrvc.paymentSection().subscribe((res: PaymentResponseModel) => {
-      console.log(res.link);
       window.location.href = res.link;
-
     }, (err) => {
       this.toast.warning("Something went wrong!!")
     })
