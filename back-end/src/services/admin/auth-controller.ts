@@ -4,10 +4,10 @@ import { adminToken } from '../../utils/token'
 import dotenv from "dotenv";
 import { CustomeError } from "../../utils/customerror";
 import { Users } from "../../models/user/usermodel";
-import { producModel } from "../../models/productsmodel";
+import { producModel } from "../../models/product/productsmodel";
 import { adminModel } from "../../models/admin/login";
-import { Product } from "../../interfaces/products_interface";
-import { userInterface } from "../../interfaces/user/user_model";
+import { Product } from "../../models/interfaces/products_interface";
+import { userInterface } from "../../models/interfaces/user/user_model";
 
 
 dotenv.config({ path: path.join(__dirname, '../../../../config.env') });
@@ -44,55 +44,11 @@ const userById = async (req: Request, next: NextFunction):Promise<userInterface>
         return users;
     }
 }
-const allProducts = async ():Promise<Product[]> => {
-    return await producModel.find()
-}
-const productsById = async (id: string):Promise<Product> => {
-    return producModel.findById(id);
-}
-const addproduts = async (product: Product):Promise<Product> => {
-    console.log(product);
 
-    const createdProduct = await producModel.create(product);
-    return createdProduct
-}
-const updateProducts = async (id: string, prodcut: Product, next: NextFunction):Promise<string> => {
-    const product = await producModel.findById(id);
-
-    if (!product) {
-        next(new CustomeError(`No such product found with id ${id}`, 404))
-    } else {
-        const updateProduct = await product.updateOne(prodcut);
-        product.save();
-        return id
-    }
-}
-const deleteProduct = async (req: Request, res: Response, next: NextFunction):Promise<Product> => {
-    const id: string = req.params.id;
-    const product = await producModel.findById(id);
-
-    if (!product) {
-        next(new CustomeError(`Product not found with id${id}`, 404));
-    } else {
-        const deletedPrdct = await producModel.findOneAndDelete({ _id: id });
-        res.json({
-            status: 'success',
-            message: `Successfully deleted a product with id '${id}'`,
-        })
-    }
-    return product;
-
-
-}
 export const admin_srvc = {
     login,
     token: adminToken,
     userFinding,
     userById,
-    allProducts,
-    productsById,
-    addproduts,
-    updateProducts,
-    deleteProduct
 
 }

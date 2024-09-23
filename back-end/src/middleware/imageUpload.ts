@@ -6,7 +6,7 @@ import multer from 'multer';
 import path from 'path';
 import { CustomeError } from '../utils/customerror';
 
-dotenv.config({ path: path.join(__dirname, '../../config.env') });
+dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 
 const storage = multer.diskStorage({
@@ -29,10 +29,9 @@ cloudin.config({
     api_secret: process.env.API_SECRET
 })
 
-export const imgUpload = async(req: Request, res: Response, next: NextFunction) => {
+export const imgUpload = async (req: Request, res: Response, next: NextFunction) => {
     upload.single("image")(req, res, async (err) => {
         // const file = req.file;
-        // console.log(req.file);
         if (err) {
             next(new CustomeError(err.message, 401));
         }
@@ -51,7 +50,7 @@ export const imgUpload = async(req: Request, res: Response, next: NextFunction) 
             next(new CustomeError('Error uploading products file to Cloudinary', 404));
         }
     })
-} 
+}
 export const userImgUpload = (req: Request, res: Response, next: NextFunction) => {
     upload.single("profileImg")(req, res, async (err) => {
         if (err) {
@@ -69,6 +68,8 @@ export const userImgUpload = (req: Request, res: Response, next: NextFunction) =
             })
             next()
         } catch (error) {
+            console.log(error);
+
             next(new CustomeError('Error uploading file to Cloudinary', 404));
         }
     })

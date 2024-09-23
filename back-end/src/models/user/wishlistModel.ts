@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import wishlistInterface from '../../interfaces/user/wishlist_model';
+import wishlistInterface from '../interfaces/user/wishlist_model';
+import { producModel } from '../product/productsmodel';
 
 const wishListSchema = new mongoose.Schema({
     userId: {
@@ -7,7 +8,8 @@ const wishListSchema = new mongoose.Schema({
     },
     wishlistedproducts: [{
         type: mongoose.Schema.Types.ObjectId,
-        required: [true, 'Please enter a valid productId']
+        required: [true, 'Please enter a valid productId'],
+        ref:producModel,
     }],
     totalPrice: Number
 

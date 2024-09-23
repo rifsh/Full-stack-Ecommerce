@@ -5,7 +5,7 @@ RUN mkdir -p /home/app
 WORKDIR /home/app
 # This command will set the default directory as /home/app.
 # Hence, the next commands will start executing from the /home/app directory of the Alpine image.
-COPY .env .
+COPY ./.env .
 
 COPY package.json .
 # To copy both package.json and package-lock.json to the working directory (/home/app) of the Alpine image.

@@ -1,0 +1,7 @@
+.addtocart {
+    background: linear-gradient(to right, #85C9D1, #46A6A7);
+}
+
+.addtocart:hover {
+    background: linear-gradient(to right, #417c82, #155758);
+}

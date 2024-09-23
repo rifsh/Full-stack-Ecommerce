@@ -2,8 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { UserProductsService } from './user-products.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, retry } from 'rxjs';
+import { GenreResponse, ResponseProduct } from '../models/allproducts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class AdminSrvcService {
   constructor(private srvc: UserProductsService, private toast: ToastrService) { }
 
 
-  getProducts() {
-    return this.http.get('http://localhost:3000/api/admin/products')
+  getProducts(): Observable<ResponseProduct> {
+    return this.http.get<ResponseProduct>(`http://localhost:3000/api/admin/products`)
   }
 
   addProducts(formValues: NgForm, file: File): Observable<object> {
@@ -28,6 +29,7 @@ export class AdminSrvcService {
     formImg.append('category', formValues.value.category);
     formImg.append('author', formValues.value.author);
     formImg.append('price', formValues.value.price);
+    console.log(formImg.getAll('category'));
 
     return this.http.post('http://localhost:3000/api/admin/addproducts', formImg)
   }
@@ -52,4 +54,19 @@ export class AdminSrvcService {
     return this.http.patch(`http://localhost:3000/api/admin/updateproduct/${id}`, formDatas);
   }
 
+  addCategory(category: string): Observable<GenreResponse> {
+    const genreName = { genreName: category };
+    return this.http.post<GenreResponse>(`http://localhost:3000/api/admin/add-genre`, genreName);
+
+  }
+
+  fetchGenres(): Observable<GenreResponse> {
+    return this.http.get<GenreResponse>(`http://localhost:3000/api/admin/get-all-genres`).pipe(
+      retry(10)
+    )
+  }
+
+  deleteGenre(id: string): Observable<object> {
+    return this.http.delete(`http://localhost:3000/api/admin/delete-genres/${id}`)
+  }
 }

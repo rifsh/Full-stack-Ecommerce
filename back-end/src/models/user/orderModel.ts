@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Users } from "./usermodel";
-import { producModel } from "../productsmodel";
+import { producModel } from "../product/productsmodel";
 
 const orderSchema = new mongoose.Schema({
     userid: {

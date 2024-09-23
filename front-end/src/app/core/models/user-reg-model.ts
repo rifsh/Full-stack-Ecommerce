@@ -5,7 +5,7 @@ export class LoginValueModel {
 }
 
 export class MainUser {
-    email:string;
+    email: string;
     name: string;
     usrname: string;
     image: string;
@@ -17,7 +17,12 @@ export class UserDetails {
 }
 
 export class UserLoginVallues {
-    username:string;
+    username: string;
     password: string;
+}
 
+export interface UserById {
+    status: string;
+    message: string;
+    data: MainUser
 }

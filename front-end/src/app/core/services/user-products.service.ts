@@ -1,12 +1,11 @@
 import { Injectable, OnInit, inject } from '@angular/core';
-import { ProductModel } from '../models/allproducts.model';
+import { ProductModel, ResponseProduct } from '../models/allproducts.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserSrvcService } from './user-srvc.service';
-import { CartResponseModel } from '../models/response-model';
 import { ToastrService } from 'ngx-toastr';
 import { ObjectId } from 'mongoose';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -19,7 +18,6 @@ export class UserProductsService implements OnInit {
   toast: ToastrService = inject(ToastrService);
 
   totalPrice: number = 0
-  cartIconCount: number = 0;
 
   constructor(private router: Router) {
 
@@ -27,6 +25,7 @@ export class UserProductsService implements OnInit {
 
   ngOnInit(): void {
     console.log("this.cartIconCount");
+
   }
 
   allProductsSrvc: ProductModel[] = [
@@ -246,40 +245,43 @@ export class UserProductsService implements OnInit {
   }
   CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');
-    if (!userId) {
-      this.toast.info("Please Login!");
-      this.router.navigate(['login']);
-    }else{
-      const prdctId = { productId: productId }
-      this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
-        if (res.message === 'Product is already present in the cart') {
-          this.toast.info(res.message);
-        } else {
-          this.toast.success(res.message);
-          this.cartIconCount = res.totalProducts;
-        }
-  
-      }, (err) => {
-        console.log(err);
-        this.toast.warning('Something went wrong');
-      });
-    }
+    const prdctId = { productId: productId };
+    return this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId);
   }
   fetchCartProducts() {
     const userId: string = localStorage.getItem('userId');
     return this.http.get(`http://localhost:3000/api/users/${userId}/cart`);
-
   }
   quandityIncr(productId: ObjectId) {
     const userId: string = localStorage.getItem('userId');
     return this.http.get(`http://localhost:3000/api/users/${userId}/increment`)
   }
   deleteCartProducts(productId: string, userId: string) {
-    const prdctId = { productId: productId }
+    const prdctId = { productId: productId };
+
     return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`, prdctId)
   }
-  paymentSection(): Observable<object> {
-    return this.http.get('http://localhost:3000/api/users/65a1065d66be826823822295/payment')
+  addToWishlist(prdctId: string): Observable<object> {
+    const productId = { productId: prdctId };
+    const userId: string = localStorage.getItem('userId');
+    return this.http.post(`http://localhost:3000/api/users/${userId}/wishlist`, productId)
   }
+  fetchWishList(): Observable<object> {
+    const userId: string = localStorage.getItem('userId');
+    return this.http.get(`http://localhost:3000/api/users/${userId}/wishlist`)
+  }
+  deleteFromWishlist(prdctId: string): Observable<Object> {
+    const productId = { productId: prdctId };
+    const userId: string = localStorage.getItem('userId');
+    return this.http.post(`http://localhost:3000/api/users/${userId}/deletewishlist`, productId)
+  }
+  paymentSection(): Observable<object> {
+    const userId: string = localStorage.getItem('userId');
+    return this.http.get(`http://localhost:3000/api/users/${userId}/payment`)
+  }
+  searching(value:string): Observable<ResponseProduct> {
+    return this.http.get<ResponseProduct>(`http://localhost:3000/api/users/products-search?search=${value}`)
+  }
+
 
 }

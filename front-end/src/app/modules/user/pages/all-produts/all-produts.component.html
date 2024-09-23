@@ -1,0 +1,28 @@
+<div>
+    <!-- nav-bar -->
+    <app-nav-bar [cartIconCount]="cartIincrement" (searchText)="changeSearch($event)"></app-nav-bar>
+    <!-- section -->
+    <div class="flex flex-col px-4" style="display: flex; align-items: center;justify-content: center;">
+        <h4 class="w-full mb-4 font-mono font-semibold text-xl mt-10">
+            Give the Gift of Good Fiction
+        </h4>
+        <div class="cards container row  d-flex justify-content-center align-items-center">
+            <p class="font-bold font-mono">Total-books: {{totalBooks}}</p>
+            <div class="col-md-3" *ngFor="let i of allProducts | paginate: { itemsPerPage: 8, currentPage: page }">
+                <app-products-list (cartCount)="recieveCount($event)" [allProducts]="i"
+                    *ngIf="!loading"></app-products-list>
+            </div>
+        </div>
+        <div class="w-full" *ngIf="loading">
+            <app-product-list-skeleton></app-product-list-skeleton>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Pagination -->
+    <pagination-controls *ngIf="searchValue.length===0" (pageChange)="page = $event"
+        style="text-align: center;"></pagination-controls>
+
+    <!-- footer -->
+    <app-footer></app-footer>
+</div>

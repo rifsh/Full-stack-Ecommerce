@@ -1,0 +1,75 @@
+<div class="main" style="display: flex; flex: 1;">
+  <div class="user-main">
+    <div class="left-side">
+      <h3>Add products</h3>
+      <form action="" class="flex flex-col justify-between w-full" id="prdctf" #prdctForm="ngForm"
+        (ngSubmit)="submit()">
+
+
+        <div class="flex items-center justify-center w-full flex-col mt-[10px]">
+          <label for="image-upload"
+            class="flex flex-col items-center justify-center w-full h-[50px] border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 border-gray-300">
+            <div class="flex flex-col items-center justify-center">
+              <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload Product Image</span> or
+                drag and drop
+              </p>
+            </div>
+            <input id="image-upload" type="file" accept="image/*" class="hidden" (change)="previewImage($event)"
+              (change)="selectImage($event)" ngModel name="image" />
+          </label>
+
+          <!-- Preview Section -->
+          <div
+            class="mt-4 w-64 h-64 bg-gray-50 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
+            <img *ngIf="imageSrc" [src]="imageSrc" alt="Uploaded Image" class="w-full h-full object-cover rounded-lg">
+            <p *ngIf="!imageSrc" class="text-gray-400">No image uploaded</p>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for="">Title: </label>
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="title">
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for="">Author: </label>
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="author">
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for=""> Description: </label>
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="description">
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for="category">Genre: </label>
+          <select id="category"
+            class="bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all py-2 w-full rounded-lg px-3"
+            name="category" [(ngModel)]="selectedGenre">
+            <option value="" disabled selected>Select a genre</option>
+            <option  [value]="item.name" *ngFor="let item of genres" value="option1">{{item.name}}</option>
+          </select>
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for="">Price: </label>
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="price">
+        </div>
+
+        <button *ngIf="!loading" class="bg-green-500 py-2 px-3 text-white rounded-md font-medium font-sans"
+          type="submit">Add product</button>
+        <div *ngIf="loading" class="bg-green-500 py-2 px-3 text-white rounded-md text-center font-medium font-sans mt-[10px]">
+          Loading...</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- [disabled]="!prdctForm.valid" -->

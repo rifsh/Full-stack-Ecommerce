@@ -1,0 +1,79 @@
+<div class="">
+    <app-nav-bar></app-nav-bar>
+    <div>
+        <div class="top flex flex-col items-center justify-center mt-20">
+            <div>
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 37 32"
+                    enable-background="new 0 0 37 32" xml:space="preserve">
+                    <g>
+                        <path fill="#808184" d="M33.582,2.483c-1.776-1.56-4.077-2.418-6.481-2.418c-2.767,0-5.49,1.134-7.472,3.112l-0.781,0.778
+		c-0.188,0.188-0.508,0.188-0.697,0l-1.027-1.024C15.23,1.041,12.711,0,10.032,0C7.415,0,4.938,1,3.059,2.814
+		c-1.87,1.805-2.911,4.287-2.933,6.988c-0.023,2.824,1.095,5.573,3.067,7.541l14.252,14.22C17.728,31.845,18.103,32,18.5,32
+		s0.772-0.155,1.055-0.437L34.061,17.09c1.952-1.948,3.021-4.645,2.934-7.399C36.906,6.897,35.693,4.338,33.582,2.483z
+		M33.355,16.382L18.849,30.855c-0.188,0.188-0.51,0.188-0.697,0L3.899,16.635c-1.784-1.779-2.794-4.267-2.773-6.824
+		c0.02-2.431,0.953-4.66,2.627-6.277C5.445,1.9,7.675,1,10.032,1c2.413,0,4.681,0.938,6.387,2.64l1.026,1.024
+		c0.565,0.564,1.545,0.564,2.11,0l0.78-0.778c1.796-1.792,4.263-2.82,6.766-2.82c2.161,0,4.228,0.77,5.821,2.169
+		c1.902,1.67,2.993,3.974,3.073,6.488C36.075,12.238,35.138,14.603,33.355,16.382z" />
+                    </g>
+                </svg>
+            </div>
+            <h1 class="text-6xl font-medium text-gray-500 font-serif">
+                My Wishlist
+            </h1>
+        </div>
+
+        <div class="products px-6">
+            <div class="overflow-x-auto  overflow-scroll h-[500px]" >
+                <table class="min-w-full bg-white">
+                    <thead class="sticky mt-1 top-0">
+                        <tr>
+                            <th class="text-left py-4 px-4 border-b border-gray-300 bg-white">Product name</th>
+                            <th class="text-left py-4 px-4 border-b border-gray-300 bg-white">Unit price</th>
+                            <th class="text-left py-4 px-4 border-b border-gray-300 bg-white">Stock</th>
+                            <th class="text-left py-4 px-4 border-b border-gray-300 bg-white"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of wishListProducts">
+                            <td class="py-2  border-b border-gray-300">
+                                <div class="flex items-center">
+                                    <button (click)="delete(item._id)">
+                                        <svg width="30px" height="30px" viewBox="0 0 1024 1024" fill="#b0b0b0"
+                                            class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            stroke="#b0b0b0">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M32 241.6c-11.2 0-20-8.8-20-20s8.8-20 20-20l940 1.6c11.2 0 20 8.8 20 20s-8.8 20-20 20L32 241.6zM186.4 282.4c0-11.2 8.8-20 20-20s20 8.8 20 20v688.8l585.6-6.4V289.6c0-11.2 8.8-20 20-20s20 8.8 20 20v716.8l-666.4 7.2V282.4z"
+                                                    fill=""></path>
+                                                <path
+                                                    d="M682.4 867.2c-11.2 0-20-8.8-20-20V372c0-11.2 8.8-20 20-20s20 8.8 20 20v475.2c0.8 11.2-8.8 20-20 20zM367.2 867.2c-11.2 0-20-8.8-20-20V372c0-11.2 8.8-20 20-20s20 8.8 20 20v475.2c0.8 11.2-8.8 20-20 20zM524.8 867.2c-11.2 0-20-8.8-20-20V372c0-11.2 8.8-20 20-20s20 8.8 20 20v475.2c0.8 11.2-8.8 20-20 20zM655.2 213.6v-48.8c0-17.6-14.4-32-32-32H418.4c-18.4 0-32 14.4-32 32.8V208h-40v-42.4c0-40 32.8-72.8 72.8-72.8H624c40 0 72.8 32.8 72.8 72.8v48.8h-41.6z"
+                                                    fill=""></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <img width="60px" height="60px" class="mx-3" [src]="item.image" alt="">
+                                    <a [routerLink]="'../all-products/viewproduct/'+(item._id)+'/'+(item.category)">
+                                        <p class="text-lg">{{item.title}}</p>
+                                    </a>
+                                </div>
+
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-300 font-mono">{{item.price | currency:'INR'}}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">In stcok</td>
+                            <td class="py-2 px-4 border-b border-gray-300">
+                                <button
+                                    class="addtocart py-1 px-3 rounded-xl text-white font-medium font-mono transition-all">
+                                    Add to cart
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

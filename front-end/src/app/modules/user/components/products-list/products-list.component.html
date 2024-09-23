@@ -1,0 +1,37 @@
+<div class="card-img mb-[60px] relative" *ngIf="allProducts.image.length">
+    <div class="book-img overflow-hidden">
+        <a [routerLink]="'viewproduct/'+(allProducts._id)+'/'+(allProducts.category)">
+            <img class="card-img-top w-100 h-[450px] hover:scale-95 transition-all duration-[0.9s]"
+                [src]="allProducts.image" alt="Card image cap">
+        </a>
+    </div>
+    <div class="card-body flex items-start justify-between">
+        <div>
+            <h5 class="card-title font-semibold mt-1">{{allProducts.title}}</h5>
+            <p class="card-text my-[8px]">—<span class="font-serif font-normal">{{allProducts.author |
+                    uppercase}}</span></p>
+
+            <div *ngIf="!cartAddedConditon" class="d-flex">
+                <button class="btn btn-outline-dark flex-shrink-0" (click)="addToCart(allProducts._id)" type="button">
+                    <i class="bi-cart-fill me-1"></i>
+                    Add to cart
+                </button>
+            </div>
+            <div *ngIf="cartButtonConsition(allProducts._id)" class="bg-green-500 text-white py-2 px-3 text-start rounded-xl w-[130px]">
+                <p>Added to cart</p>
+            </div>
+        </div>
+        <div>
+            <p class="font-mono font-extrabold">{{allProducts.price | currency:'INR'}}</p>
+
+            <div (click)="addToWishList(allProducts._id)" class="cursor-pointer absolute bottom-1 right-1 border border-black w-9 h-9 flex items-center justify-center rounded-full">
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                    <path
+                        d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181" />
+                </svg>
+
+            </div>
+        </div>
+    </div>
+</div>
+    

@@ -1,0 +1,74 @@
+<nav class="bg-opacity-10 bg-gray-200 px-4 py-[12px] sticky -top-1 z-50 shadow-lg shadow-cyan-500/50">
+  <div class="container mx-auto justify-between flex items-center">
+    <!-- Logo/Brand -->
+    <div class="text-black text-2xl font-bold me-[30px]">
+      <a routerLink="" class="font-mono text-4xl">BOOKS</a>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="hidden md:flex space-x-6 md:items-center font-sans font-semibold">
+      <div *ngIf="searchCondition">
+        <input ngModel [(ngModel)]="searchValue" (input)="searchOperation()"
+          class="bg-gray-100 focus:outline-none border-2 border-gray-300 ps-2 pe-40 py-[13px] rounded-xl" type="text"
+          placeholder="Search Books">
+      </div>
+      <a routerLink="/user/all-products" class="text-black hover:text-gray-200">All Books</a>
+
+      <div class="flex flex-col items-center justify-center relative" (mouseover)="categories()"
+        (mouseleave)="categoriesOff()">
+        <p class="text-black hover:text-blue-500 font-semibold cursor-pointer">Categories</p>
+        <div *ngIf="categoriesDivCondition" class="absolute top-3 left-0 mt-2 bg-gray-100 w-48 rounded-lg shadow-lg z-10">
+          <div *ngFor="let item of genres, let i = index"
+            class="w-full hover:bg-blue-100 hover:rounded-sm transition-all">
+            <p role="button" class="over:bg-blue-200 px-4 py-2 cursor-pointer" (click)="filterProducts(item.name)">
+              {{item.name}} </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative w-[72px]" *ngIf="showcart">
+        <a routerLink="/user/view-cart" class="text-black hover:text-gray-200 flex items-center">
+          <p>Cart</p>
+          <div
+            class="absolute top-0 right-0 flex items-center text-white justify-center w-[20px] h-[20px] bg-red-600 rounded-full">
+            <p>{{cartIconCount}}</p>
+          </div>
+          <i class='bx bx-cart-alt text-3xl'></i>
+        </a>
+      </div>
+      <a routerLink="/user/view-wishlist" class="flex items-center" *ngIf="wishList">
+        <p class="me-1">Wishlist</p>
+        <i class='bx bx-heart text-3xl'></i>
+      </a>
+      <a (click)="logOut()" role="button" class="text-black hover:text-gray-200 flex items-center"
+        *ngIf="logoutLinkShow">
+        <p>Logout</p>
+        <i class='bx bx-log-out text-3xl'></i>
+      </a>
+      <a routerLink="/login" class="text-black hover:text-gray-200 flex items-center" *ngIf="logLinkShow">
+        <p>LogIn</p>
+        <i class='bx bx-log-in text-3xl'></i>
+      </a>
+      <a routerLink="../profile" class="text-black hover:text-gray-200 flex items-center" *ngIf="logoutLinkShow">
+        <i class='bx bx-user-circle text-3xl'></i>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden">
+      <button id="menu-toggle" class="text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-2">
+    <a href="#" class="block py-2 px-4 text-white hover:bg-blue-700">Home</a>
+    <a href="#" class="block py-2 px-4 text-white hover:bg-blue-700">About</a>
+    <a href="#" class="block py-2 px-4 text-white hover:bg-blue-700">Services</a>
+    <a href="#" class="block py-2 px-4 text-white hover:bg-blue-700">Contact</a>
+  </div>
+</nav>

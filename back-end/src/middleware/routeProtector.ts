@@ -13,12 +13,11 @@ export const userRouteProtecter = catchAsync(async (req: Request, res: Response,
     //Reading the token and check if it exist
     let token: string;
     const testToken = req.headers.authorization;
-    if (testToken && testToken.startsWith('bearer')) {
+    
+    if (testToken && testToken.startsWith('Bearer')) {
         const sampleToken: string[] = testToken.split(' ');
         token = sampleToken[1];
     }
-
-
     if (!token) {
         next(new CustomeError('You are not logged in !!', 402));
     }
@@ -35,6 +34,7 @@ export const userRouteProtecter = catchAsync(async (req: Request, res: Response,
 
     next();
 })
+
 export const adminRouteProtecter = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     let token: string;
 

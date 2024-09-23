@@ -1,0 +1,96 @@
+<div class="main w-[1289px]">
+  <div class="user-main">
+    <!-- <div class="right-side">
+          </div>   -->
+    <div class="left-side">
+      <h3>Create products</h3>
+      <form action="" style="display: flex; flex-direction: column; justify-content: space-between;"
+        #editprdctForm="ngForm" (ngSubmit)="editPrdct()">
+
+        <div class="flex items-center justify-center w-full flex-col mt-[10px]">
+          <label for="image-upload"
+            class="flex flex-col items-center justify-center w-full h-[50px] border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 border-gray-300">
+            <div class="flex flex-col items-center justify-center">
+              <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload Product Image</span> or
+                drag and drop
+              </p>
+            </div>
+            <input id="image-upload" type="file" accept="image/*" class="hidden" (change)="previewImage($event)"
+              (change)="selectImage($event)" ngModel name="image" />
+          </label>
+          <div
+            class="mt-4 w-64 h-64 bg-gray-50 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
+            <img *ngIf="imageSrc" [src]="imageSrc" alt="Uploaded Image" class="w-full h-full object-cover rounded-lg">
+            <p *ngIf="!imageSrc" class="text-gray-400">No image uploaded</p>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px]" for="">Title: </label>
+          <!-- <mat-form-field>
+              <mat-label>Product Title</mat-label>
+              <input type="text" matInput required name="title" ngModel>
+            </mat-form-field> -->
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="title">
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px]" for="">Author: </label>
+          <!-- <mat-form-field>
+            <mat-label>Product Author</mat-label>
+            <input type="text" matInput required name="author" ngModel>
+          </mat-form-field> -->
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="author">
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px]" for="">Description</label>
+          <!-- <mat-form-field>
+            <mat-label>Product Description</mat-label>
+            <input type="text" matInput name="description" ngModel>
+          </mat-form-field> -->
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="description">
+        </div>
+
+        <!-- <div class="inputs">
+          <label for="">Product Type</label>
+          <mat-form-field>
+            <mat-label>Product Type</mat-label>
+            <input type="text" matInput required name="category" ngModel>
+          </mat-form-field>
+        </div> -->
+
+        <div class="inputs">
+          <label class="w-[200px] font-medium text-gray-500" for="category">Genre: </label>
+          <select id="category"
+            class="bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all py-2 w-full rounded-lg px-3"
+            name="category" [(ngModel)]="selectedGenre">
+            <option value="" disabled selected>Select a genre</option>
+            <option [value]="item.name" *ngFor="let item of genres" value="option1">{{item.name}}</option>
+          </select>
+        </div>
+
+        <div class="inputs">
+          <label class="w-[200px]" for="">Price</label>
+          <!-- <mat-form-field>
+            <mat-label>Product Price</mat-label>
+            <input type="text" matInput required name="price" ngModel>
+          </mat-form-field> -->
+          <input type="text"
+            class="bg-gray-200 focus:outline-none focus:outline-blue-400 transition-all py-2 w-full rounded-lg ps-3"
+            ngModel name="price">
+        </div>
+
+        <button *ngIf="!loading" class="bg-green-500 py-2 px-3 text-white rounded-md font-medium font-sans mt-2"
+          type="submit">Submit</button>
+        <div *ngIf="loading" class="bg-green-500 py-2 px-3 text-white rounded-md text-center font-medium font-sans mt-2">
+          Loading...</div>
+      </form>
+    </div>
+  </div>

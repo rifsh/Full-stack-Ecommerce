@@ -2,7 +2,6 @@ import { CanActivateFn, Router } from '@angular/router';
 import { UserSrvcService } from '../services/user-srvc.service';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { KeycloakAuthGuard } from "keycloak-angular";
 
 
 export const sighnUpGuard: CanActivateFn = () => {

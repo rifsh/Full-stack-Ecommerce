@@ -17,6 +17,7 @@ export class UserSrvcService implements OnInit {
 
   showSearchBox: boolean = true;
   showCart: boolean = false;
+  wishList: boolean = false;
   isLogged: boolean = false;
   usrname: string;
   adminname: string;
@@ -65,15 +66,17 @@ export class UserSrvcService implements OnInit {
         this.usrname = localStorage.getItem('username');
         if (this.usrname) {
           this.showCart = true;
-          // this.isLogged = true;
+          this.isLogged = true;
+          this.wishList = true;
         }
         localStorage.setItem('userId', res.user._id);
         localStorage.setItem('userToken', res.token);
         this.toast.success("Log in Success");
-        this.router.navigate(['all-products']);
+        this.router.navigate(['user/all-products']);
       }
     }, (err) => {
       this.showCart = false;
+      this.wishList = false;
       this.toast.error('Not Authorized')
     })
   }
@@ -95,7 +98,7 @@ export class UserSrvcService implements OnInit {
         this.adminname = res.name;
         localStorage.setItem('token', res.token);
         this.toast.success('Admin Accessed');
-        this.router.navigate(['admin-dashboard']);
+        this.router.navigate(['admin/home']);
       } else {
       }
     }, (err) => {

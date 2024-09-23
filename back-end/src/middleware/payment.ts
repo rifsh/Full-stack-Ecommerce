@@ -5,17 +5,15 @@ import path from "path";
 import catchAsync from "../utils/asyncHandler";
 import { Users } from "../models/user/usermodel";
 import { CartModel } from "../models/user/cartModel";
-import { producModel } from "../models/productsmodel";
+import { producModel } from "../models/product/productsmodel";
 import { CustomeError } from "../utils/customerror";
 
 dotenv.config({ path: path.join(__dirname, '../../config.env') });
 
 export const paymentMethod = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const userDetails = await Users.findById(userId);
     const CartProducts = await CartModel.findOne({ userId })
     const prdcts = await producModel.find({ _id: CartProducts.products });
-    const prdctId = prdcts.map((x) => { return x._id });
     
     if (!userId || !prdcts || !CartProducts) {
         return next(new CustomeError('User is not found', 404));
@@ -49,7 +47,7 @@ export const paymentMethod = catchAsync(async (req: Request, res: Response, next
                 quantity: 1
             }
         }),
-        success_url: 'http://localhost:3000/api/users/success',
+        success_url: 'http://localhost:4200/user/payment-success',
         cancel_url: 'http://localhost:3000/api/users/cancel'
     })
     if (!mainStripe) {
