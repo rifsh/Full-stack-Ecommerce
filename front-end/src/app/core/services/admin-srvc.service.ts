@@ -13,6 +13,7 @@ export class AdminSrvcService {
   prdctsId: number = 0;
   editForm: NgForm;
   http: HttpClient = inject(HttpClient);
+  url: string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/admin/';
 
   constructor(private srvc: UserProductsService, private toast: ToastrService) { }
 
@@ -56,12 +57,12 @@ export class AdminSrvcService {
 
   addCategory(category: string): Observable<GenreResponse> {
     const genreName = { genreName: category };
-    return this.http.post<GenreResponse>(`http://localhost:3000/api/admin/add-genre`, genreName);
+    return this.http.post<GenreResponse>(`${this.url}add-genre`, genreName);
 
   }
 
   fetchGenres(): Observable<GenreResponse> {
-    return this.http.get<GenreResponse>(`http://localhost:3000/api/admin/get-all-genres`).pipe(
+    return this.http.get<GenreResponse>(`${this.url}get-all-genres`).pipe(
       retry(10)
     )
   }

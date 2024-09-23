@@ -31,11 +31,14 @@ export class ProductsListComponent implements OnInit {
 
 
   addToCart(prdctid: string) {
+    this.cartAddedConditon = true;
     const c = this.srvc.CartFunction(prdctid).subscribe((res: CartResponseModel) => {
       if (res.message === 'Product is already present in the cart') {
         this.toast.info(res.message);
+        this.cartAddedConditon = false;
       } else {
         this.toast.success(res.message);
+        this.cartAddedConditon = false;
         this.cartCount.emit(res.totalProducts)
       }
 
@@ -43,9 +46,11 @@ export class ProductsListComponent implements OnInit {
       console.log(err);
       if (err.error.message === 'You are not logged in !!') {
         this.toast.info("Please Login!");
+        this.cartAddedConditon = false;
         this.router.navigate(['login']);
       } else {
         this.toast.warning('Something went wrong');
+        this.cartAddedConditon = false;
       }
     });
   }

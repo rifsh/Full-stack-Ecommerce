@@ -16,8 +16,9 @@ export class UserProductsService implements OnInit {
   http: HttpClient = inject(HttpClient);
   srvc: UserSrvcService = inject(UserSrvcService);
   toast: ToastrService = inject(ToastrService);
+  totalPrice: number = 0;
 
-  totalPrice: number = 0
+  userUrl:string='https://full-stack-ecommerce-3-7ygl.onrender.com/api/users/'
 
   constructor(private router: Router) {
 
@@ -246,11 +247,11 @@ export class UserProductsService implements OnInit {
   CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');
     const prdctId = { productId: productId };
-    return this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId);
+    return this.http.post(`${this.userUrl}${userId}/cart`, prdctId);
   }
   fetchCartProducts() {
     const userId: string = localStorage.getItem('userId');
-    return this.http.get(`http://localhost:3000/api/users/${userId}/cart`);
+    return this.http.get(`${this.userUrl}${userId}/cart`);
   }
   quandityIncr(productId: ObjectId) {
     const userId: string = localStorage.getItem('userId');
@@ -280,7 +281,7 @@ export class UserProductsService implements OnInit {
     return this.http.get(`http://localhost:3000/api/users/${userId}/payment`)
   }
   searching(value:string): Observable<ResponseProduct> {
-    return this.http.get<ResponseProduct>(`http://localhost:3000/api/users/products-search?search=${value}`)
+    return this.http.get<ResponseProduct>(`${this.userUrl}/products-search?search=${value}`)
   }
 
 

@@ -21,6 +21,8 @@ export class UserSrvcService implements OnInit {
   isLogged: boolean = false;
   usrname: string;
   adminname: string;
+  adminUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/admin/'
+  userUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/users/'
 
 
   adminLoginValues: AdminLoginData[] = [{
@@ -50,7 +52,7 @@ export class UserSrvcService implements OnInit {
     formData.append('email', formValue.value.regEmail);
     formData.append('password', formValue.value.regPassword);
     formData.append('confirmPassword', formValue.value.regrePassword);
-    return this.http.post('http://localhost:3000/api/users/signup', formData)
+    return this.http.post(`${this.userUrl}signup`, formData)
   }
 
   emptyStorage() {
@@ -59,7 +61,7 @@ export class UserSrvcService implements OnInit {
 
   login(userValues: UserLoginVallues) {
 
-    this.http.post('http://localhost:3000/api/users/login', userValues).subscribe((res: LoginResponse) => {
+    this.http.post(`${this.userUrl}login`, userValues).subscribe((res: LoginResponse) => {
       if (res.status === "Valid") {
         this.userId = res.user._id;
         localStorage.setItem('username', res.user.name);
@@ -77,12 +79,14 @@ export class UserSrvcService implements OnInit {
     }, (err) => {
       this.showCart = false;
       this.wishList = false;
-      this.toast.error('Not Authorized')
+      this.toast.error('Not Authorized');
+      console.log(err);
+      
     })
   }
 
   allUsers(): Observable<object> {
-    return this.http.get('http://localhost:3000/api/admin/users')
+    return this.http.get(this.userUrl)
   }
 
   adminLogin(adminName: string, adminPassword: string) {
@@ -93,7 +97,7 @@ export class UserSrvcService implements OnInit {
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json'
     })
-    this.http.post('http://localhost:3000/api/admin/login', values).subscribe((res: adminLoginRes) => {
+    this.http.post(`${this.adminUrl}login`, values).subscribe((res: adminLoginRes) => {
       if (res.token) {
         this.adminname = res.name;
         localStorage.setItem('token', res.token);

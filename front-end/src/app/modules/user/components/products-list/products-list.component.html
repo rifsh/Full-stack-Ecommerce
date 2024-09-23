@@ -17,8 +17,8 @@
                     Add to cart
                 </button>
             </div>
-            <div *ngIf="cartButtonConsition(allProducts._id)" class="bg-green-500 text-white py-2 px-3 text-start rounded-xl w-[130px]">
-                <p>Added to cart</p>
+            <div *ngIf="cartAddedConditon" class="cursor-pointer d-flex border-black border w-[110px] rounded-md py-1 px-3">
+                <p>Adding...</p>
             </div>
         </div>
         <div>
