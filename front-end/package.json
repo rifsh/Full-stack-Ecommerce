@@ -24,7 +24,6 @@
     "boxicons": "^2.1.4",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "keycloak-angular": "^15.2.1",
     "mongoose": "^8.0.3",
     "ngx-infinite-scroll": "^16.0.0",
     "ngx-pagination": "^6.0.3",
