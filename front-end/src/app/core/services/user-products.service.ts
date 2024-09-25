@@ -239,10 +239,10 @@ export class UserProductsService implements OnInit {
     return this.http.get('http://localhost:3000/api/users/products');
   }
   fleteringProductsAction(productCategory: string): Observable<object> {
-    return this.http.get(`http://localhost:3000/api/users/${productCategory}/category`);
+    return this.http.get(`${this.userUrl}${productCategory}/category`);
   }
-  viewProducts(id: string, prdctSrvctype?: string) {
-    return this.http.get(`http://localhost:3000/api/users/products_Id/${id}`);
+  viewProducts(id: string) {
+    return this.http.get(`${this.userUrl}products_Id/${id}`);
   }
   CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');

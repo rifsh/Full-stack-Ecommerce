@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product-list-skeleton',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list-skeleton.component.css']
 })
 export class ProductListSkeletonComponent {
-
+  @Input() condition: string = ''
 }

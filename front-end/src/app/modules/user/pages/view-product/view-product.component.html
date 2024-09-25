@@ -1,5 +1,11 @@
 <div>
     <app-nav-bar [cartIconCount]="cartIncerment"></app-nav-bar>
+
+    <div>
+        <app-product-list-skeleton [condition]="'view-products'"
+            *ngIf="loading"></app-product-list-skeleton>
+    </div>
+
     <section class="py-5" *ngFor="let i of productsView">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center ">

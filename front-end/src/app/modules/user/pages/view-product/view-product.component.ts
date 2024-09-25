@@ -18,9 +18,10 @@ export class ViewProductComponent {
 
   // type: string;
   cartIncerment: number = 0;
+  loading: boolean = true;
 
 
-  constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService, private toast:ToastrService, private router:Router) {
+  constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService, private toast: ToastrService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,6 +32,9 @@ export class ViewProductComponent {
     let categoryParam: string = this.activateRoute.snapshot.paramMap.get("category");
     this.srvc.viewProducts(routeParam).subscribe((resm: ResponseProduct) => {
       this.productsView.push(resm.datas);
+      if (this.productsView) {
+        this.loading = false;
+      }
       this.srvc.fleteringProductsAction(categoryParam).subscribe((res: ResponseProduct) => {
         this.relatedProduct = res.datas;
         this.relatedProduct = this.relatedProduct.filter((x) => { return x._id != resm.id });
@@ -51,9 +55,9 @@ export class ViewProductComponent {
       console.log(err.error.message);
       if (err.error.message === 'You are not logged in !!') {
         this.toast.info("Please Login!");
-      this.router.navigate(['login']);
+        this.router.navigate(['login']);
       } else {
-        this.toast.warning('Something went wrong'); 
+        this.toast.warning('Something went wrong');
       }
     });
 

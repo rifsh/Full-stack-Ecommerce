@@ -59,6 +59,9 @@ export class AllProdutsComponent {
   changeSearch(searchContent:ResponseProduct) {
     this.allProducts = searchContent.datas;
     this.totalBooks  = this.allProducts.length;
+    if (this.allProducts) {
+      this.searchValue = 'ss'
+    }
   }
 
   filterProducts(category: string) {
