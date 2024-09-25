@@ -21,8 +21,8 @@ export class UserSrvcService implements OnInit {
   isLogged: boolean = false;
   usrname: string;
   adminname: string;
-  adminUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/admin/'
-  userUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/users/'
+  adminUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/admin/';
+  userUrl:string = 'https://full-stack-ecommerce-3-7ygl.onrender.com/api/users/';
 
 
   adminLoginValues: AdminLoginData[] = [{

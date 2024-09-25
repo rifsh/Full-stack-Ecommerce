@@ -3,14 +3,16 @@ import { Users } from "../../models/user/usermodel";
 import { userToken } from "../../utils/token";
 import { CustomeError } from "../../utils/customerror";
 import { Usersignup } from "../../models/interfaces/user/userSignup";
+import { userInterface } from "../../models/interfaces/user/user_model";
 
 
 //JWT_token
 
 const signUp = async (userDatas: Usersignup) => {
-    const newUser = await Users.create(userDatas);
+    const newUser:userInterface = await Users.create(userDatas);
     return newUser
 }
+
 const logIn = async (usrname: string, password: string, next: NextFunction): Promise<string> => {
     if (!usrname || !password) {
         const err = new CustomeError(`Please provide a Username and password`, 404);

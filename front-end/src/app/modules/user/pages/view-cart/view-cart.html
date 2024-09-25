@@ -37,9 +37,13 @@
                 </div>
                 <div
                   class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-                  <div class="float-md-end">
+                  <div class="float-md-end" *ngIf="!deleteLoading">
                     <a type="button" (click)="deletePrdctCart(i._id)"
                       class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
+                  </div>
+                  <div *ngIf="deleteLoading"
+                    class="border border-gray-400 flex items-center justify-center py-1 px-2 rounded-md text-red-600">
+                    <p>Removing...</p>
                   </div>
                 </div>
               </div>

@@ -19,6 +19,7 @@ export class AddToCartComponent {
   totalQuanndity: number = 1
   userid: string = localStorage.getItem('userId');
   loading: boolean = true;
+  deleteLoading: boolean = false;
   toast: ToastrService = inject(ToastrService);
 
 
@@ -61,8 +62,10 @@ export class AddToCartComponent {
   }
 
   deletePrdctCart(prdcts: string) {
+    this.deleteLoading = true;
     this.prdctsSrvc.deleteCartProducts(prdcts, this.userid).subscribe((res: CartResponseModel) => {
       this.toast.info(res.message);
+      this.deleteLoading = false;
       this.fetchCart();
     })
   }

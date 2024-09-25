@@ -255,30 +255,30 @@ export class UserProductsService implements OnInit {
   }
   quandityIncr(productId: ObjectId) {
     const userId: string = localStorage.getItem('userId');
-    return this.http.get(`http://localhost:3000/api/users/${userId}/increment`)
+    return this.http.get(`${this.userUrl}${userId}/increment`)
   }
   deleteCartProducts(productId: string, userId: string) {
     const prdctId = { productId: productId };
 
-    return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`, prdctId)
+    return this.http.post(`${this.userUrl}${userId}/deletecart`, prdctId)
   }
   addToWishlist(prdctId: string): Observable<object> {
     const productId = { productId: prdctId };
     const userId: string = localStorage.getItem('userId');
-    return this.http.post(`http://localhost:3000/api/users/${userId}/wishlist`, productId)
+    return this.http.post(`${this.userUrl}${userId}/wishlist`, productId)
   }
   fetchWishList(): Observable<object> {
     const userId: string = localStorage.getItem('userId');
-    return this.http.get(`http://localhost:3000/api/users/${userId}/wishlist`)
+    return this.http.get(`${this.userUrl}${userId}/wishlist`)
   }
   deleteFromWishlist(prdctId: string): Observable<Object> {
     const productId = { productId: prdctId };
     const userId: string = localStorage.getItem('userId');
-    return this.http.post(`http://localhost:3000/api/users/${userId}/deletewishlist`, productId)
+    return this.http.post(`${this.userUrl}${userId}/deletewishlist`, productId)
   }
   paymentSection(): Observable<object> {
     const userId: string = localStorage.getItem('userId');
-    return this.http.get(`http://localhost:3000/api/users/${userId}/payment`)
+    return this.http.get(`${this.userUrl}${userId}/payment`)
   }
   searching(value:string): Observable<ResponseProduct> {
     return this.http.get<ResponseProduct>(`${this.userUrl}/products-search?search=${value}`)

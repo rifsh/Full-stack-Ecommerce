@@ -19,7 +19,7 @@ export class AdminSrvcService {
 
 
   getProducts(): Observable<ResponseProduct> {
-    return this.http.get<ResponseProduct>(`http://localhost:3000/api/admin/products`)
+    return this.http.get<ResponseProduct>(`${this.url}products`)
   }
 
   addProducts(formValues: NgForm, file: File): Observable<object> {
@@ -32,15 +32,15 @@ export class AdminSrvcService {
     formImg.append('price', formValues.value.price);
     console.log(formImg.getAll('category'));
 
-    return this.http.post('http://localhost:3000/api/admin/addproducts', formImg)
+    return this.http.post(`${this.url}addproducts`, formImg)
   }
 
   removeProducts(prdctId: string): Observable<object> {
-    return this.http.delete(`http://localhost:3000/api/admin/deleteproduct/${prdctId}`)
+    return this.http.delete(`${this.url}deleteproduct/${prdctId}`)
   }
 
   singleProduct(id: string): Observable<object> {
-    return this.http.get(`http://localhost:3000/api/admin/productbyid/${id}`)
+    return this.http.get(`${this.url}productbyid/${id}`)
   }
 
   editPrdct(id: string, file: File, formValues: NgForm): Observable<object> {
@@ -52,7 +52,7 @@ export class AdminSrvcService {
     formDatas.append('author', formValues.value.author);
     formDatas.append('price', formValues.value.price);
 
-    return this.http.patch(`http://localhost:3000/api/admin/updateproduct/${id}`, formDatas);
+    return this.http.patch(`${this.url}updateproduct/${id}`, formDatas);
   }
 
   addCategory(category: string): Observable<GenreResponse> {
@@ -68,6 +68,6 @@ export class AdminSrvcService {
   }
 
   deleteGenre(id: string): Observable<object> {
-    return this.http.delete(`http://localhost:3000/api/admin/delete-genres/${id}`)
+    return this.http.delete(`${this.url}delete-genres/${id}`)
   }
 }
